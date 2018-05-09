@@ -1,31 +1,38 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import './App.css';
 
 class App extends Component {
   constructor(){
     super();
-    this.changeTitle = this.changeTitle.bind(this)
 
     this.state = {
-      title: "Hola Mundo desde Estado"
-    }
+      names: []
+    };
+
+    axios.get("http://localhost:3001/names")
+    .then(response => {
+      this.setState({
+        names: response.data
+      })
+    })
+    .catch(error => {
+      console.log(error);
+    })
   }
 
   render() {
     return (
       <div>
-        <h1>{this.state.title}</h1>
-        <button onClick={this.changeTitle}>Cambia el título</button>
+        <h1>Hola Axios</h1>
+        <ul>
+          {this.state.names.map(name => 
+            <li key={name}>{name}</li>
+          )}
+        </ul>
       </div>
     );
   }
-
-  changeTitle(){
-    this.setState({
-      title: "Nuevo título"
-    });
-  }
-
 }
 
 export default App;
