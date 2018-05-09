@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import Welcome from './Welcome.js';
 import './App.css';
 
 class App extends Component {
   render() {
+    const names = ["Pedro", "Juan", "Germán"];
     return (
-      <h1>Hola Mundo </h1>
+      <div>
+        {names.map(name =>
+          <Welcome name={name}/>
+        )}        
+      </div>
     );
   }
 }
